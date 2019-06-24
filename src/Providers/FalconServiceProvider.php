@@ -1,9 +1,9 @@
 <?php
 
-namespace Msi\Falcon;
+namespace Msi\Falcon\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Msi\Falcon\Commands\FalconCommand;
+use Msi\Falcon\Console\Commands\FalconCommand;
 
 class FalconServiceProvider extends ServiceProvider
 {
