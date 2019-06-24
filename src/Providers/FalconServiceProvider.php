@@ -35,16 +35,14 @@ class FalconServiceProvider extends ServiceProvider
         // Config::set('database.default', env('DB_CONNECTION', 'falcon'));
 
         $this->publishes([
-            __DIR__.'/../../config/database.php' => base_path('config/database.php'),
-        ], 'config');
+            __DIR__.'/../../config/database.php' => config_path('database.php'),
+        ]);
 
         // $this->publishes([
         //     __DIR__.'/../../database/migrations/create_newname_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_nename_table.php'),
         // ], 'migrations');
-        
-        // $this->publishes([
-        //     __DIR__ . '/../../config' => base_path('config')
-        // ], 'config');
+
+        // $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
 
         $this->loadRoutesFrom(__DIR__.'/../../routes/api.php');
     }
