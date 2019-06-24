@@ -3,6 +3,7 @@
 namespace Msi\Falcon\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Config;
 use Msi\Falcon\Console\Commands\FalconCommand;
 
 class FalconServiceProvider extends ServiceProvider
