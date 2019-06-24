@@ -1,5 +1,5 @@
 <?php
 
-Route::get('falcon', function () {
+Route::middleware('auth:api')->get('falcon', function () {
     return "Hello Falcon";
 });
