@@ -15,7 +15,7 @@ class FalconServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/database.php', 'database');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/falcon.php', 'falcon');
     }
 
     /**
@@ -35,8 +35,8 @@ class FalconServiceProvider extends ServiceProvider
         // Config::set('database.default', env('DB_CONNECTION', 'falcon'));
 
         $this->publishes([
-            __DIR__.'/../../config/database.php' => config_path('database.php'),
-        ]);
+            __DIR__.'/../../config/falcon.php' => config_path('falcon.php'),
+        ], 'config');
 
         // $this->publishes([
         //     __DIR__.'/../../database/migrations/create_newname_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_nename_table.php'),
