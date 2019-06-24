@@ -1,5 +1,5 @@
 <?php
 
-Route::get('api/falcon', function () {
+Route::apiresource('falcon', function () {
     return "Hello Falcon";
 });
