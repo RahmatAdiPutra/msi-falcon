@@ -1,0 +1,32 @@
+{
+    "name": "msi/falcon",
+    "description": "Register for the application",
+    "keywords": ["msi", "falcon"],
+    "type": "library",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Rahmat Adi Putra",
+            "email": "rahmat.adi.putra.21@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Msi\\Falcon\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Msi\\Falcon\\Test\\": "test/"
+        }
+    },
+    "extra": {
+	    "laravel": {
+	        "providers": [
+	            "Msi\\Falcon\\Providers\\FalconServiceProvider"
+	        ]
+	    }
+	}
+}
