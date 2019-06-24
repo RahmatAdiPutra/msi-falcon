@@ -30,6 +30,6 @@ class FalconServiceProvider extends ServiceProvider
             ]);
         }
 
-        $this->loadRoutesFrom(__DIR__.'../../routes/api.php');
+        $this->loadRoutesFrom('../../routes/api.php');
     }
 }
