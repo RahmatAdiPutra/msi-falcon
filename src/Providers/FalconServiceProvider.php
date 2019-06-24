@@ -32,7 +32,7 @@ class FalconServiceProvider extends ServiceProvider
         }
 
         // overwrite database default in file /config/database.php
-        // Config::set('database.default', env('DB_CONNECTION', 'falcon'));
+        Config::set('database.default', env('DB_CONNECTION', 'falcon'));
 
         $this->publishes([
             __DIR__.'/../../config/database.php' => config_path('database.php'),
