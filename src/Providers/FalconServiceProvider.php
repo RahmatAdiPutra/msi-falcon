@@ -30,6 +30,9 @@ class FalconServiceProvider extends ServiceProvider
             ]);
         }
 
+        // overwrite database default in file /config/database.php
+        Config::set('database.default', env('DB_CONNECTION', 'falcon'));
+
         $this->loadRoutesFrom(__DIR__.'/../../routes/api.php');
     }
 }
