@@ -39,7 +39,6 @@ class FalconCommand extends Command
     public function handle()
     {
         Artisan::call('vendor:publish', ['--tag' => 'falcon-migrations']);
-        // Artisan::call('session:table');
         Artisan::call('migrate');
     }
 }
