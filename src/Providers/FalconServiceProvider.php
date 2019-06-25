@@ -4,6 +4,7 @@ namespace Msi\Falcon\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\File;
 use Msi\Falcon\Console\Commands\FalconCommand;
 
 class FalconServiceProvider extends ServiceProvider
@@ -38,8 +39,9 @@ class FalconServiceProvider extends ServiceProvider
         //     __DIR__.'/../../config/database.php' => config_path('database.php'),
         // ], 'config');
 
+        $files = File::files(__DIR__.'/../../../../../database/migrations');
         $this->publishes([
-            __DIR__.'/../../database/migrations/create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
+            __DIR__.'/../../database/migrations/create_users_table.php' => database_path('migrations/'.pathinfo($files[0])['basename']),
             __DIR__.'/../../database/migrations/create_logs_table.php' => database_path('migrations/'.date('Y_m_d').'_000001_create_logs_table.php'),
             __DIR__.'/../../database/migrations/create_settings_table.php' => database_path('migrations/'.date('Y_m_d').'_000002_create_settings_table.php'),
             __DIR__.'/../../database/migrations/create_applications_table.php' => database_path('migrations/'.date('Y_m_d').'_000003_create_applications_table.php'),
