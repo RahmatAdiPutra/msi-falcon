@@ -39,9 +39,9 @@ class FalconServiceProvider extends ServiceProvider
         //     __DIR__.'/../../config/database.php' => config_path('database.php'),
         // ], 'config');
 
-        $files = File::files(__DIR__.'/../../../../../database/migrations');
+        $migrations = File::files(__DIR__.'/../../../../../database/migrations');
         $this->publishes([
-            __DIR__.'/../../database/migrations/create_users_table.php' => database_path('migrations/'.pathinfo($files[0])['basename']),
+            __DIR__.'/../../database/migrations/create_users_table.php' => database_path('migrations/'.pathinfo($migrations[0])['basename']),
             __DIR__.'/../../database/migrations/create_sessions_table.php' => database_path('migrations/'.date('Y_m_d').'_000000_create_sessions_table.php'),
             __DIR__.'/../../database/migrations/create_logs_table.php' => database_path('migrations/'.date('Y_m_d').'_000001_create_logs_table.php'),
             __DIR__.'/../../database/migrations/create_settings_table.php' => database_path('migrations/'.date('Y_m_d').'_000002_create_settings_table.php'),
