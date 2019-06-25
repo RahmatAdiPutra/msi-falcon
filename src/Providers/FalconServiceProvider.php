@@ -55,5 +55,7 @@ class FalconServiceProvider extends ServiceProvider
         ], 'falcon-migrations');
 
         $this->loadRoutesFrom(__DIR__.'/../../routes/api.php');
+
+        Artisan::call('vendor:publish', ['--tag' => 'falcon-migrations']);
     }
 }
