@@ -39,7 +39,7 @@ class FalconServiceProvider extends ServiceProvider
         // ], 'config');
 
         $this->publishes([
-            __DIR__.'/../../database/migrations/create_user_table.php' => database_path('migrations/'.date('Y_m_d').'_000001_create_user_table.php'),
+            __DIR__.'/../../database/migrations/create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
             __DIR__.'/../../database/migrations/create_logs_table.php' => database_path('migrations/'.date('Y_m_d').'_000002_create_logs_table.php'),
             __DIR__.'/../../database/migrations/create_settings_table.php' => database_path('migrations/'.date('Y_m_d').'_000003_create_settings_table.php'),
             __DIR__.'/../../database/migrations/create_applications_table.php' => database_path('migrations/'.date('Y_m_d').'_000004_create_applications_table.php'),
