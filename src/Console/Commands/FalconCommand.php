@@ -3,6 +3,7 @@
 namespace Msi\Falcon\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
 class FalconCommand extends Command
 {
@@ -37,9 +38,8 @@ class FalconCommand extends Command
      */
     public function handle()
     {
-        $this->line("testing");
-        exec("java --version", $output, $ret);
-        $this->line($output);
-        $this->line($ret);
+        Artisan::call('vendor:publish', ['--tag' => 'falcon-migrations']);
+        Artisan::call('session:table');
+        Artisan::call('migrate');
     }
 }
