@@ -44,12 +44,19 @@ class FalconCommand extends Command
         $this->line($output);
         $this->line($ret);
 
-        $this->setupConfig();
-        $this->setupMigrations();
+        if ($this->setupConfig()) {
+            $this->line('Setup config successfully');
+        }
+
+        if ($this->setupMigrations()) {
+            $this->line('Setup migrations successfully');
+        }
     }
 
     public function setupConfig()
     {
+        $result = false;
+
         $listFile = collect([
             'database.php'
         ]);
@@ -67,14 +74,19 @@ class FalconCommand extends Command
                 $allow = Str::contains($filename, $name);
                 if ($allow) {
                     File::delete($pathConfig.$filename);
+                    $result = true;
                     break;
                 }
             }
         }
+
+        return $result;
     }
-    
+
     public function setupMigrations()
     {
+        $result = false;
+
         $listFile = collect([
             'create_users_table.php',
             'create_sessions_table.php',
@@ -102,9 +114,13 @@ class FalconCommand extends Command
                 $allow = Str::contains($filename, $name);
                 if ($allow) {
                     File::delete($pathMigrations.$filename);
+                    $result = true;
                     break;
                 }
             }
         }
+
+        return $result;
     }
+
 }
