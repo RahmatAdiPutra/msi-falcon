@@ -41,13 +41,7 @@ class FalconServiceProvider extends ServiceProvider
         //     __DIR__.'/../../config/database.php' => config_path('database.php'),
         // ], 'config');
 
-        $pathMigrations = __DIR__.'/../../../../../database/migrations/';
-        $fileMigrations = File::files($pathMigrations);
-        $filename = pathinfo($fileMigrations[0])['basename'];
-        $allow = Str::contains($filename, 'create_users_table');
-        if ($allow) {
-            File::delete($pathMigrations.$filename);
-        }
+        $this->setupMigrations();
         
         $this->publishes([
             __DIR__.'/../../database/migrations/create_users_table.php' => database_path('migrations/2019_06_26_000000_create_users_table.php'),
@@ -66,5 +60,40 @@ class FalconServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../../routes/api.php');
 
         Artisan::call('vendor:publish', ['--tag' => 'falcon-migrations']);
+    }
+
+    public function setupMigrations()
+    {
+        $listFile = collect([
+            'create_users_table.php',
+            'create_sessions_table.php',
+            'create_logs_table.php',
+            'create_settings_table.php',
+            'create_applications_table.php',
+            'create_companies_table.php',
+            'create_departments_table.php',
+            'create_roles_table.php',
+            'create_user_has_roles_table.php',
+            'create_permissions_table.php',
+            'create_role_has_permissions_table.php'
+        ]);
+
+        $pathMigrations = __DIR__.'/../../../../../database/migrations/';
+        $fileMigrations = File::files($pathMigrations);
+
+        foreach($fileMigrations as $file)
+        {
+            $pathinfo = pathinfo($file);
+            $filename = $pathinfo['basename'];
+
+            foreach($listFile as $name)
+            {
+                $allow = Str::contains($filename, $name);
+                if ($allow) {
+                    File::delete($pathMigrations.$filename);
+                    break;
+                }
+            }
+        }
     }
 }
