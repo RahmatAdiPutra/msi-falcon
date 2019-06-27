@@ -54,7 +54,7 @@ class FalconServiceProvider extends ServiceProvider
             __DIR__.'/../../database/migrations/create_role_has_permissions_table.php' => database_path('migrations/2019_06_26_000010_create_role_has_permissions_table.php'),
         ], 'falcon-migrations');
 
-        Artisan::call('falcon:start');
-        Artisan::call('vendor:publish', ['--tag' => ['falcon-config', 'falcon-migrations']]);
+        // Artisan::call('falcon:start');
+        // Artisan::call('vendor:publish', ['--tag' => ['falcon-config', 'falcon-migrations']]);
     }
 }
