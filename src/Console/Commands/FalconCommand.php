@@ -14,7 +14,7 @@ class FalconCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'falcon:start {connection : Choose connection for migrate}';
+    protected $signature = 'falcon:start {connection? : Choose connection for migrate}';
 
     /**
      * The console command description.
