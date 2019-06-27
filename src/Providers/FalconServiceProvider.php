@@ -4,7 +4,6 @@ namespace Msi\Falcon\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Artisan;
 use Msi\Falcon\Console\Commands\FalconCommand;
 
 class FalconServiceProvider extends ServiceProvider
@@ -53,8 +52,5 @@ class FalconServiceProvider extends ServiceProvider
             __DIR__.'/../../database/migrations/create_permissions_table.php' => database_path('migrations/2019_06_26_000009_create_permissions_table.php'),
             __DIR__.'/../../database/migrations/create_role_has_permissions_table.php' => database_path('migrations/2019_06_26_000010_create_role_has_permissions_table.php'),
         ], 'falcon-migrations');
-
-        // Artisan::call('falcon:start');
-        // Artisan::call('vendor:publish', ['--tag' => ['falcon-config', 'falcon-migrations']]);
     }
 }

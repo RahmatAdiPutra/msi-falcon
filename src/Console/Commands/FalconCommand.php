@@ -5,6 +5,7 @@ namespace Msi\Falcon\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Artisan;
 
 class FalconCommand extends Command
 {
@@ -46,10 +47,12 @@ class FalconCommand extends Command
 
         if ($this->setupConfig()) {
             $this->line('Setup config successfully');
+            Artisan::call('vendor:publish', ['--tag' => ['falcon-config']]);
         }
 
         if ($this->setupMigrations()) {
             $this->line('Setup migrations successfully');
+            Artisan::call('vendor:publish', ['--tag' => ['falcon-migrations']]);
         }
     }
 
