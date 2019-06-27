@@ -92,6 +92,7 @@ class FalconCommand extends Command
 
         $listFile = collect([
             'create_users_table.php',
+            'create_password_resets_table.php',
             'create_sessions_table.php',
             'create_logs_table.php',
             'create_settings_table.php',
