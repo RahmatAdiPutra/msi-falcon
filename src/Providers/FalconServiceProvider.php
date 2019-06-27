@@ -61,6 +61,8 @@ class FalconServiceProvider extends ServiceProvider
         ], 'falcon-migrations');
 
         Artisan::call('vendor:publish', ['--tag' => ['falcon-config', 'falcon-migrations']]);
+
+        $this->loadMigrationsFrom(__DIR__.'/../../../../../database/migrations/');
     }
 
     public function setupMigrations()
