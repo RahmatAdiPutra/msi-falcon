@@ -14,7 +14,7 @@ class FalconCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'falcon:start';
+    protected $signature = 'falcon:start {connection}';
 
     /**
      * The console command description.
@@ -44,6 +44,8 @@ class FalconCommand extends Command
         exec("java --version", $output, $ret);
         $this->line($output);
         $this->line($ret);
+        
+        $this->line($this->argument('connection'));
 
         if ($this->setupConfig()) {
             $this->line('Setup config successfully');
