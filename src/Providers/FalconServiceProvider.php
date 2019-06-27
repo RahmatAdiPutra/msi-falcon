@@ -3,10 +3,10 @@
 namespace Msi\Falcon\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Str;
 use Msi\Falcon\Console\Commands\FalconCommand;
 
 class FalconServiceProvider extends ServiceProvider
@@ -18,7 +18,7 @@ class FalconServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this->mergeConfigFrom(__DIR__ . '/../../config/database.php', 'database');
+        
     }
 
     /**
@@ -34,8 +34,7 @@ class FalconServiceProvider extends ServiceProvider
             ]);
         }
 
-        // overwrite database default in file /config/database.php
-        // Config::set('database.default', env('DB_CONNECTION', 'falcon'));
+        Config::set('auth.providers.users.model', \Msi\Falcon\Models\User::class);
 
         $this->loadRoutesFrom(__DIR__.'/../../routes/api.php');
 
