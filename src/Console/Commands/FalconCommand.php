@@ -3,6 +3,8 @@
 namespace Msi\Falcon\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class FalconCommand extends Command
 {
@@ -41,5 +43,68 @@ class FalconCommand extends Command
         exec("java --version", $output, $ret);
         $this->line($output);
         $this->line($ret);
+
+        $this->setupConfig();
+        $this->setupMigrations();
+    }
+
+    public function setupConfig()
+    {
+        $listFile = collect([
+            'database.php'
+        ]);
+
+        $pathConfig = __DIR__.'/../../../../../../config/';
+        $fileConfig = File::files($pathConfig);
+
+        foreach($fileConfig as $file)
+        {
+            $pathinfo = pathinfo($file);
+            $filename = $pathinfo['basename'];
+
+            foreach($listFile as $name)
+            {
+                $allow = Str::contains($filename, $name);
+                if ($allow) {
+                    File::delete($pathConfig.$filename);
+                    break;
+                }
+            }
+        }
+    }
+    
+    public function setupMigrations()
+    {
+        $listFile = collect([
+            'create_users_table.php',
+            'create_sessions_table.php',
+            'create_logs_table.php',
+            'create_settings_table.php',
+            'create_applications_table.php',
+            'create_companies_table.php',
+            'create_departments_table.php',
+            'create_roles_table.php',
+            'create_user_has_roles_table.php',
+            'create_permissions_table.php',
+            'create_role_has_permissions_table.php'
+        ]);
+
+        $pathMigrations = __DIR__.'/../../../../../../database/migrations/';
+        $fileMigrations = File::files($pathMigrations);
+
+        foreach($fileMigrations as $file)
+        {
+            $pathinfo = pathinfo($file);
+            $filename = $pathinfo['basename'];
+
+            foreach($listFile as $name)
+            {
+                $allow = Str::contains($filename, $name);
+                if ($allow) {
+                    File::delete($pathMigrations.$filename);
+                    break;
+                }
+            }
+        }
     }
 }
