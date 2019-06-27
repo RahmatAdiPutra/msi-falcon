@@ -14,7 +14,7 @@ class FalconCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'falcon:start {connection=null : Choose connection for migrate}';
+    protected $signature = 'falcon:start {connection : Choose connection for migrate}';
 
     /**
      * The console command description.
@@ -45,7 +45,9 @@ class FalconCommand extends Command
         $this->line($output);
         $this->line($ret);
         
-        $this->line($this->argument('connection'));
+        if ($this->argument('connection')) {
+            $this->line($this->argument('connection'));
+        }
 
         if ($this->setupConfig()) {
             $this->line('Setup config successfully');
