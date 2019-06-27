@@ -37,11 +37,13 @@ class FalconServiceProvider extends ServiceProvider
         // overwrite database default in file /config/database.php
         // Config::set('database.default', env('DB_CONNECTION', 'falcon'));
 
-        // $this->publishes([
-        //     __DIR__.'/../../config/database.php' => config_path('database.php'),
-        // ], 'config');
+        $this->loadRoutesFrom(__DIR__.'/../../routes/api.php');
 
         $this->setupMigrations();
+
+        $this->publishes([
+            __DIR__.'/../../config/database.php' => config_path('database.php'),
+        ], 'falcon-config');
         
         $this->publishes([
             __DIR__.'/../../database/migrations/create_users_table.php' => database_path('migrations/2019_06_26_000000_create_users_table.php'),
@@ -57,9 +59,7 @@ class FalconServiceProvider extends ServiceProvider
             __DIR__.'/../../database/migrations/create_role_has_permissions_table.php' => database_path('migrations/2019_06_26_000010_create_role_has_permissions_table.php'),
         ], 'falcon-migrations');
 
-        $this->loadRoutesFrom(__DIR__.'/../../routes/api.php');
-
-        Artisan::call('vendor:publish', ['--tag' => 'falcon-migrations']);
+        Artisan::call('vendor:publish', ['--tag' => ['falcon-config', 'falcon-migrations']]);
     }
 
     public function setupMigrations()
@@ -91,6 +91,30 @@ class FalconServiceProvider extends ServiceProvider
                 $allow = Str::contains($filename, $name);
                 if ($allow) {
                     File::delete($pathMigrations.$filename);
+                    break;
+                }
+            }
+        }
+    }
+
+    public function setupConfig() {
+        $listFile = collect([
+            'database.php'
+        ]);
+
+        $pathConfig = __DIR__.'/../../../../../config/';
+        $fileConfig = File::files($pathConfig);
+
+        foreach($fileConfig as $file)
+        {
+            $pathinfo = pathinfo($file);
+            $filename = $pathinfo['basename'];
+
+            foreach($listFile as $name)
+            {
+                $allow = Str::contains($filename, $name);
+                if ($allow) {
+                    File::delete($pathConfig.$filename);
                     break;
                 }
             }
